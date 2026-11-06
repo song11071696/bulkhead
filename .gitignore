@@ -1,0 +1,11 @@
+*.egg-info/
+*.pyc
+.bulkhead/
+.env
+.pytest_cache/
+.venv/
+__pycache__/
+build/
+dist/
+recording/node_modules/
+recording/raw/
