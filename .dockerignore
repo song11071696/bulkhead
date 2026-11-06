@@ -1,0 +1,7 @@
+.venv/
+.bulkhead/
+.git/
+media/raw/
+__pycache__/
+*.egg-info/
+.env

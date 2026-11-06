@@ -11,7 +11,7 @@ Bulkhead sits in the tool loop of Claude Code (or any agent that can call an HTT
 | writes a file, fetches a URL, sends an MCP message | **Protect** `/pii` with `anonymize` | deny (secrets), or rewrite the content with placeholders before it is written or sent |
 | says "done" | **Verify** `/grounding` | whether the final report matches the tool output the agent actually received; a contradicted claim blocks the stop once |
 
-**Demo video (2:55, captions):** https://song11071696.github.io/bulkhead/demo.html (file: [docs/media/bulkhead-demo.mp4](docs/media/bulkhead-demo.mp4)) · **Click-through recorded demo (no install):** https://song11071696.github.io/bulkhead/
+**Demo video (2:57, captions):** https://song11071696.github.io/bulkhead/demo.html (file: [docs/media/bulkhead-demo.mp4](docs/media/bulkhead-demo.mp4)) · **Click-through recorded demo (no install):** https://song11071696.github.io/bulkhead/
 
 ![Bulkhead dashboard: Guard cuts the injected passages from a README, the session is tainted, and a harmless-looking command is denied by Decide](media/screenshot-taint.png)
 

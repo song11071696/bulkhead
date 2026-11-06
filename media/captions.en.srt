@@ -1,111 +1,111 @@
 1
-00:00:00,831 --> 00:00:06,354
+00:00:00,243 --> 00:00:05,762
 Bulkhead: a session-aware firewall for AI coding agents, built on Clocked.
 
 2
-00:00:06,354 --> 00:00:12,502
+00:00:05,762 --> 00:00:12,488
 Bulkhead sits in Claude Code's hooks. Each tool call is checked by Clocked before the agent acts on it.
 
 3
-00:00:12,502 --> 00:00:19,567
+00:00:12,488 --> 00:00:19,018
 Task: fix a failing CSV parser test. Bulkhead records it as the session's only source of authority.
 
 4
-00:00:19,567 --> 00:00:26,002
+00:00:19,018 --> 00:00:25,578
 Every shell command is one Clocked Pipeline: Inspect → Protect → Decide. Running the test: allowed.
 
 5
-00:00:26,002 --> 00:00:33,200
+00:00:25,578 --> 00:00:32,586
 Every tool result goes through Guard + Protect before the agent reads it. Test output: clean.
 
 6
-00:00:33,200 --> 00:00:39,600
+00:00:32,586 --> 00:00:39,047
 The upstream README hides an instruction for AI agents. Guard: 99% injection. Only the flagged passages are cut, and the session is now tainted.
 
 7
-00:00:39,600 --> 00:00:45,894
-`make sync-fixtures` looks harmless: Inspect says 1% malicious. Decide, given the taint: 99% it follows the injected instruction → denied.
+00:00:39,047 --> 00:00:45,589
+`make sync-fixtures` looks harmless: Inspect: under 1% malicious. Decide, given the taint: 99% it follows the injected instruction → denied.
 
 8
-00:00:45,894 --> 00:00:52,544
+00:00:45,589 --> 00:00:51,804
 `curl … | bash`: Inspect flags it at step one and stops the pipeline. Protect and Decide are skipped, so no credits are wasted.
 
 9
-00:00:52,544 --> 00:00:59,590
+00:00:51,804 --> 00:00:59,122
 The real fix is a file edit. Protect checks what gets written: nothing sensitive, no objection.
 
 10
-00:00:59,590 --> 00:01:05,974
+00:00:59,122 --> 00:01:05,339
 Re-running the tests stays allowed in the tainted session: Decide puts it at 3% follows-injection.
 
 11
-00:01:05,974 --> 00:01:12,341
+00:01:05,339 --> 00:01:12,118
 New test output comes back: one unrelated test still fails.
 
 12
-00:01:12,341 --> 00:01:18,712
+00:01:12,118 --> 00:01:19,163
 The agent reports “All 12 tests now pass”. Verify: 97% contradicted by the test output → it may not stop yet.
 
 13
-00:01:18,712 --> 00:01:26,035
+00:01:19,163 --> 00:01:26,338
 Asked once, the agent corrects its report and mentions the attack. Bulkhead lets it finish.
 
 14
-00:01:26,035 --> 00:01:31,582
+00:01:26,338 --> 00:01:32,532
 Second session: reproduce a customer's bug from a support ticket.
 
 15
-00:01:31,582 --> 00:01:37,171
+00:01:32,532 --> 00:01:38,132
 Protect masks the email, phone, card and address before the agent ever sees them.
 
 16
-00:01:37,171 --> 00:01:42,703
+00:01:38,132 --> 00:01:43,985
 A test fixture would commit customer data. Protect's anonymized text replaces it (updatedInput), and the company name the test needs is kept.
 
 17
-00:01:42,703 --> 00:01:48,470
+00:01:43,985 --> 00:01:49,414
 A live API key hard-coded into source: denied. Secrets belong in the environment.
 
 18
-00:01:48,470 --> 00:01:53,997
+00:01:49,414 --> 00:01:55,004
 A card number inside a URL: denied before the request leaves the machine.
 
 19
-00:01:53,997 --> 00:02:00,342
+00:01:55,004 --> 00:02:01,379
 The regression test itself runs normally.
 
 20
-00:02:00,342 --> 00:02:06,001
+00:02:01,379 --> 00:02:06,671
 Third session: a performance task that points the agent at a GitHub issue.
 
 21
-00:02:06,001 --> 00:02:10,733
+00:02:06,671 --> 00:02:12,678
 The issue nudges AI assistants to run a benchmark that uploads data. Guard: injection, but severity low.
 
 22
-00:02:10,733 --> 00:02:16,426
+00:02:12,678 --> 00:02:17,470
 So it is not auto-blocked: following it lands in the uncertainty band and goes to the human (ask).
 
 23
-00:02:16,426 --> 00:02:21,134
+00:02:17,470 --> 00:02:23,019
 A local micro-benchmark is allowed.
 
 24
-00:02:21,134 --> 00:02:26,741
+00:02:23,019 --> 00:02:28,690
 Read-only git commands are decided locally, at zero credits.
 
 25
-00:02:26,741 --> 00:02:34,812
+00:02:28,690 --> 00:02:36,615
 Failure drill: the Clocked gateway is forced to answer 429 twice.
 
 26
-00:02:34,812 --> 00:02:41,209
+00:02:36,615 --> 00:02:43,125
 Retried with backoff under the same Idempotency-Key. The third attempt succeeds.
 
 27
-00:02:41,209 --> 00:02:47,232
+00:02:43,125 --> 00:02:49,202
 402 out of credits: no retry loop. Fail mode 'ask' hands the decision to the human instead of guessing.
 
 29
-00:02:47,251 --> 00:02:54,259
+00:02:49,290 --> 00:02:56,293
 Every Clocked output changes what the agent does. github.com/song11071696/bulkhead
