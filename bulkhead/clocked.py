@@ -170,8 +170,11 @@ class ClockedClient:
                 source = headers.get("X-Bulkhead-Source", "live")
                 if source == "live":
                     self.ledger.add(endpoint, credits, key)
+                latency = (time.monotonic() - start) * 1000
+                if source == "replay" and headers.get("X-Bulkhead-Latency") is not None:
+                    latency += float(headers["X-Bulkhead-Latency"])  # recorded latency + any retry wait now
                 res = ClockedResult(endpoint, body, credits=credits, model_ms=model_ms,
-                                    latency_ms=(time.monotonic() - start) * 1000, attempts=attempt,
+                                    latency_ms=latency, attempts=attempt,
                                     idempotency_key=key, retries=retries, source=source)
                 if self.mode == "record" and source == "live":
                     self._record(endpoint, payload, res)
@@ -218,7 +221,8 @@ class ClockedClient:
                 return 404, {"error": f"no recorded response for {endpoint} ({path.name}); run with BULKHEAD_MODE=record"}, {}, None
             rec = json.loads(path.read_text())
             return 200, rec["response"], {"X-Clocked-Credits": rec.get("credits", 0),
-                                          "X-Clocked-Model-Ms": rec.get("model_ms"), "X-Bulkhead-Source": "replay"}, None
+                                          "X-Clocked-Model-Ms": rec.get("model_ms"), "X-Bulkhead-Source": "replay",
+                                          "X-Bulkhead-Latency": rec.get("latency_ms")}, None
         headers = {"Idempotency-Key": key, "Content-Type": "application/json"}
         api_key = os.environ.get("CLOCKED_API_KEY", "")
         # "proxy-managed" = the key is injected by an egress proxy (sandboxed dev environments)

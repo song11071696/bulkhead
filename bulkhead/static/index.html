@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bulkhead · session-aware firewall for AI coding agents</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231f2a44'/%3E%3Cpath d='M8 9h16M8 16h16M8 23h16' stroke='%2360a5fa' stroke-width='3'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <svg viewBox="0 0 32 32" width="34" height="34" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#1f2a44"/><path d="M7 9h18M7 16h18M7 23h18" stroke="#60a5fa" stroke-width="3" stroke-linecap="round"/><path d="M16 5v22" stroke="#93c5fd" stroke-width="1.5" stroke-dasharray="2 2"/></svg>
+    <div>
+      <div class="name">Bulkhead</div>
+      <div class="tag">Session-aware firewall for AI coding agents · built on Clocked</div>
+    </div>
+  </div>
+  <div class="totals" id="totals"></div>
+  <div class="mode" id="mode">…</div>
+</header>
+
+<div class="layout">
+  <aside class="left">
+    <section>
+      <h3>Replay a session</h3>
+      <p class="hint">Synthetic Claude Code sessions sent through the real hook endpoint.</p>
+      <div id="scenarios"></div>
+    </section>
+    <section>
+      <h3>Sessions</h3>
+      <div id="sessions" class="sessions"></div>
+    </section>
+  </aside>
+
+  <main class="main" id="main">
+    <div class="empty" id="empty">
+      <h2>Point Claude Code at Bulkhead, or replay a session.</h2>
+      <p>Every tool call your agent makes passes through Clocked before it acts:</p>
+      <ul class="flow">
+        <li><b>Guard</b> screens what the agent reads, and cuts only the injected sentences.</li>
+        <li><b>Inspect</b> judges each shell command on its own.</li>
+        <li><b>Decide</b> judges it against your task and anything suspicious read earlier.</li>
+        <li><b>Protect</b> masks personal data coming in and rewrites what goes out.</li>
+        <li><b>Verify</b> checks the agent's final report against the tool output it actually got.</li>
+      </ul>
+      <pre class="snippet">bulkhead serve            # dashboard + hook endpoint on :8787
+bulkhead install-claude   # adds http hooks to .claude/settings.json</pre>
+    </div>
+    <div id="session" hidden>
+      <div class="shead">
+        <div>
+          <div class="slabel" id="slabel"></div>
+          <div class="goal" id="goal"></div>
+        </div>
+        <div class="sstats" id="sstats"></div>
+      </div>
+      <div id="taint"></div>
+      <div id="timeline" class="timeline"></div>
+    </div>
+  </main>
+
+  <aside class="right" id="right">
+    <section>
+      <h3>Clocked in this session</h3>
+      <div id="endpoints"></div>
+    </section>
+    <section>
+      <h3>Decision bands</h3>
+      <div id="bands" class="bands"></div>
+    </section>
+    <section>
+      <h3>Legend</h3>
+      <div class="legend">
+        <span class="seg injection">injected instruction</span>
+        <span class="seg script">risky command</span>
+        <span class="seg pii">&lt;PII&gt; masked</span>
+      </div>
+      <p class="hint">Raw personal values are never stored in this audit log: Protect's placeholders are kept instead.</p>
+    </section>
+  </aside>
+</div>
+<div id="caption" class="caption" hidden></div>
+<script src="static/app.js"></script>
+</body>
+</html>
