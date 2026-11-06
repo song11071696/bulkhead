@@ -74,6 +74,17 @@ function segHtml(segs) {
   return segs.map((s) => (s.kind ? `<span class="seg ${s.kind}" title="${esc(s.label || s.kind)}">${esc(s.text)}</span>` : esc(s.text))).join("");
 }
 
+function sanHtml(t) {
+  // highlight what Bulkhead changed in the copy the agent receives / the file that gets written
+  return esc(t).replace(/\[BULKHEAD:[^\]]*\]/g, (m) => `<span class="seg cut">${m}</span>`)
+    .replace(/&lt;[A-Z_]{3,}&gt;/g, (m) => `<span class="seg pii">${m}</span>`);
+}
+
+function scrollToFlag(box) {
+  const f = box && box.querySelector(".seg");
+  if (f) box.scrollTop = Math.max(0, f.offsetTop - box.offsetTop - 40);
+}
+
 function meter(label, value, opts = {}) {
   if (value === null || value === undefined) return "";
   const v = Math.max(0, Math.min(1, value / (opts.max || 1)));
@@ -154,7 +165,7 @@ function eventHtml(e) {
     const altLabel = e.stage === "inbound" ? "What the agent saw" : "What gets written";
     body = `<div class="code" data-orig="1">${segHtml(d.segments)}</div>`;
     if (hasAlt) body = `<div class="tabs"><button class="ghost tab-o">Original (flagged)</button><button class="tab-s">${altLabel}</button></div>
-      <div class="code orig">${segHtml(d.segments)}</div><div class="code light san" hidden>${esc(d.sanitized)}</div>`;
+      <div class="code orig">${segHtml(d.segments)}</div><div class="code light san" hidden>${sanHtml(d.sanitized)}</div>`;
   }
   const reasons = (v.reasons || []).map((r) => `<li>${esc(r)}</li>`).join("");
   const cap = d.caption ? `<div class="cap">${esc(d.caption)}</div>` : "";
@@ -174,6 +185,7 @@ function wireTabs(el) {
   const show = (san) => {
     el.querySelector(".orig").hidden = san; el.querySelector(".san").hidden = !san;
     o.classList.toggle("ghost", san); s.classList.toggle("ghost", !san);
+    scrollToFlag(el.querySelector(san ? ".san" : ".orig"));
   };
   o.onclick = () => show(false); s.onclick = () => show(true);
   show(false);
@@ -267,7 +279,7 @@ async function pollSession(first) {
     wireTabs(el);
     const flag = el.querySelector(".code .seg.injection, .code .seg.pii, .code .seg.script");
     if (flag) { const box = flag.closest(".code"); box.scrollTop = Math.max(0, flag.offsetTop - box.offsetTop - 40); }
-    if (!first) el.scrollIntoView({ behavior: "smooth", block: "end" });
+    if (!first) el.scrollIntoView({ behavior: "smooth", block: "start" });
   }
   renderSessionHeader(r.session);
 }
