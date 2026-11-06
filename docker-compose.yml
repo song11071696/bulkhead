@@ -1,0 +1,15 @@
+services:
+  bulkhead:
+    build: .
+    ports:
+      - "127.0.0.1:8787:8787"
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      # Without CLOCKED_API_KEY in .env the dashboard runs on recorded Clocked responses.
+      BULKHEAD_MODE: ${BULKHEAD_MODE:-}
+    volumes:
+      - bulkhead-data:/data
+volumes:
+  bulkhead-data:
