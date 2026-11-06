@@ -11,9 +11,15 @@ Bulkhead sits in the tool loop of Claude Code (or any agent that can call an HTT
 | writes a file, fetches a URL, sends an MCP message | **Protect** `/pii` with `anonymize` | deny (secrets), or rewrite the content with placeholders before it is written or sent |
 | says "done" | **Verify** `/grounding` | whether the final report matches the tool output the agent actually received; a contradicted claim blocks the stop once |
 
-**Demo video (2:50):** [media/bulkhead-demo.mp4](media/bulkhead-demo.mp4) · **Click-through recorded demo (no install):** https://song11071696.github.io/bulkhead/
+**Demo video (2:55, captions):** https://song11071696.github.io/bulkhead/demo.html (file: [docs/media/bulkhead-demo.mp4](docs/media/bulkhead-demo.mp4)) · **Click-through recorded demo (no install):** https://song11071696.github.io/bulkhead/
 
-![Bulkhead dashboard: a poisoned README taints the session and a harmless-looking command is denied](media/screenshot-taint.png)
+![Bulkhead dashboard: Guard cuts the injected passages from a README, the session is tainted, and a harmless-looking command is denied by Decide](media/screenshot-taint.png)
+
+<details><summary>More screenshots</summary>
+
+![Protect masks a support ticket on the way in and rewrites a test fixture on the way out](media/screenshot-protect.png)
+
+</details>
 
 ---
 
@@ -28,8 +34,8 @@ Step 2 is a perfectly ordinary command. Judged alone it **is** benign, and Clock
 
 | `make sync-fixtures` | Inspect `malicious` | Decide `follows_untrusted` | Decide `exfiltration` | Bulkhead |
 |---|---|---|---|---|
-| in a session that never read the README (control) | 1% | not asked (no taint) | 34% | **allow** |
-| after the poisoned README was read | 1% | **99%** | **99%** | **deny**: "carries out an instruction injected by untrusted content… Inspect alone rated it benign" |
+| in a session that never read the README (control) | 0.5% | not asked (no taint) | 34% | **allow** |
+| after the poisoned README was read | 0.5% | **99%** | **99%** | **deny**: "carries out an instruction injected by untrusted content… Inspect alone rated it benign" |
 
 The same session then re-runs `pytest`, which Decide rates 3% `follows_untrusted`, so legitimate work continues while the session is tainted.
 

@@ -9,3 +9,6 @@ build/
 dist/
 recording/node_modules/
 recording/raw/
+media/raw/
+media/bulkhead-demo.mp4
+media/captions.srt
