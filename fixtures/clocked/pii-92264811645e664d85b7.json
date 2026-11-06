@@ -1,0 +1,66 @@
+{
+ "endpoint": "pii",
+ "request": {
+  "text": "import os\n\n# Payment provider settings\nPAYMENTS_API_KEY = \"pay_live_EXAMPLE_4f9a8e7d6c5b4a3f2e1d0c9b\"\nWEBHOOK_URL = os.environ.get(\"WEBHOOK_URL\", \"https://hooks.example.com/billing\")\n",
+  "entities": {
+   "api_secret": "API keys, access tokens, passwords, private keys, or connection strings that embed credentials",
+   "email": null,
+   "phone": null,
+   "ssn": null,
+   "credit_card": null,
+   "bank_account": null,
+   "date_of_birth": null,
+   "address": null,
+   "person": null
+  },
+  "anonymize": "replace",
+  "threshold": 0.5,
+  "instructions": "Outgoing content written or sent by an AI coding agent. Flag personal data about real people (names, emails, phone numbers, card and account numbers, addresses) and credentials. Placeholders such as <EMAIL> and environment-variable names without values are not findings. Company names are not personal data."
+ },
+ "response": {
+  "model": "clocked-1.0",
+  "entities": [
+   {
+    "type": "api_secret",
+    "value": "pay_live_EXAMPLE_4f9a8e7d6c5b4a3f2e1d0c9b",
+    "start": 57,
+    "end": 102,
+    "confidence": 0.973,
+    "source": "model",
+    "mentions": 1
+   }
+  ],
+  "counts": {
+   "api_secret": 1
+  },
+  "threshold": 0.5,
+  "instructions_used": "custom",
+  "mentions": {
+   "candidates": 0,
+   "variants": 0,
+   "reads": 0,
+   "verified": 0,
+   "occurrences": {
+    "read": 0,
+    "kept": 0
+   },
+   "rejected": {},
+   "spans": 0,
+   "ms": 0
+  },
+  "checks": {
+   "trimmed": 1,
+   "split": 0,
+   "rejected": {}
+  },
+  "anonymized_text": "import os\n\n# Payment provider settings\nPAYMENTS_API_KEY = \"<API_SECRET>\"\nWEBHOOK_URL = os.environ.get(\"WEBHOOK_URL\", \"https://hooks.example.com/billing\")\n",
+  "timing": {
+   "read_ms": 120,
+   "total_ms": 121
+  }
+ },
+ "credits": 5.0,
+ "model_ms": 117.299774,
+ "latency_ms": 358,
+ "recorded_at": "2026-11-06T05:15:46Z"
+}

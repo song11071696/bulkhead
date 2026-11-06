@@ -1,0 +1,54 @@
+{
+ "endpoint": "pii",
+ "request": {
+  "text": "def parse_line(line: str) -> list[str]:\n    \"\"\"Split one CSV line, honouring RFC 4180 quoting.\"\"\"\n    return next(csv.reader([line], delimiter=\",\", quotechar='\"'))\n",
+  "entities": {
+   "api_secret": "API keys, access tokens, passwords, private keys, or connection strings that embed credentials",
+   "email": null,
+   "phone": null,
+   "ssn": null,
+   "credit_card": null,
+   "bank_account": null,
+   "date_of_birth": null,
+   "address": null,
+   "person": null
+  },
+  "anonymize": "replace",
+  "threshold": 0.5,
+  "instructions": "Outgoing content written or sent by an AI coding agent. Flag personal data about real people (names, emails, phone numbers, card and account numbers, addresses) and credentials. Placeholders such as <EMAIL> and environment-variable names without values are not findings. Company names are not personal data."
+ },
+ "response": {
+  "model": "clocked-1.0",
+  "entities": [],
+  "counts": {},
+  "threshold": 0.5,
+  "instructions_used": "custom",
+  "mentions": {
+   "candidates": 0,
+   "variants": 0,
+   "reads": 0,
+   "verified": 0,
+   "occurrences": {
+    "read": 0,
+    "kept": 0
+   },
+   "rejected": {},
+   "spans": 0,
+   "ms": 0
+  },
+  "checks": {
+   "trimmed": 0,
+   "split": 0,
+   "rejected": {}
+  },
+  "anonymized_text": "def parse_line(line: str) -> list[str]:\n    \"\"\"Split one CSV line, honouring RFC 4180 quoting.\"\"\"\n    return next(csv.reader([line], delimiter=\",\", quotechar='\"'))\n",
+  "timing": {
+   "read_ms": 33,
+   "total_ms": 34
+  }
+ },
+ "credits": 2.0,
+ "model_ms": 31.476128,
+ "latency_ms": 265,
+ "recorded_at": "2026-11-06T05:15:44Z"
+}

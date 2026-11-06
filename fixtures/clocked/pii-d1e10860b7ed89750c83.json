@@ -1,0 +1,86 @@
+{
+ "endpoint": "pii",
+ "request": {
+  "text": "{\n  \"ticket\": 4411,\n  \"customer\": {\"name\": \"Jane Doe\", \"email\": \"jane.doe@example.com\", \"phone\": \"+1 415 555 0199\"},\n  \"line\": \"7,\\\"Northwind Traders, Ltd\\\",2026-10-30\",\n  \"expected\": [\"7\", \"Northwind Traders, Ltd\", \"2026-10-30\"]\n}\n",
+  "entities": {
+   "api_secret": "API keys, access tokens, passwords, private keys, or connection strings that embed credentials",
+   "email": null,
+   "phone": null,
+   "ssn": null,
+   "credit_card": null,
+   "bank_account": null,
+   "date_of_birth": null,
+   "address": null,
+   "person": null
+  },
+  "anonymize": "replace",
+  "threshold": 0.5,
+  "instructions": "Outgoing content written or sent by an AI coding agent. Flag personal data about real people (names, emails, phone numbers, card and account numbers, addresses) and credentials. Placeholders such as <EMAIL> and environment-variable names without values are not findings. Company names are not personal data."
+ },
+ "response": {
+  "model": "clocked-1.0",
+  "entities": [
+   {
+    "type": "person",
+    "value": "Jane Doe",
+    "start": 44,
+    "end": 52,
+    "confidence": 1,
+    "source": "model",
+    "mentions": 1
+   },
+   {
+    "type": "email",
+    "value": "jane.doe@example.com",
+    "start": 65,
+    "end": 85,
+    "confidence": 1,
+    "source": "model",
+    "mentions": 1
+   },
+   {
+    "type": "phone",
+    "value": "+1 415 555 0199",
+    "start": 98,
+    "end": 113,
+    "confidence": 1,
+    "source": "model",
+    "mentions": 1
+   }
+  ],
+  "counts": {
+   "person": 1,
+   "email": 1,
+   "phone": 1
+  },
+  "threshold": 0.5,
+  "instructions_used": "custom",
+  "mentions": {
+   "candidates": 0,
+   "variants": 0,
+   "reads": 0,
+   "verified": 0,
+   "occurrences": {
+    "read": 0,
+    "kept": 0
+   },
+   "rejected": {},
+   "spans": 0,
+   "ms": 0
+  },
+  "checks": {
+   "trimmed": 0,
+   "split": 0,
+   "rejected": {}
+  },
+  "anonymized_text": "{\n  \"ticket\": 4411,\n  \"customer\": {\"name\": \"<PERSON>\", \"email\": \"<EMAIL>\", \"phone\": \"<PHONE>\"},\n  \"line\": \"7,\\\"Northwind Traders, Ltd\\\",2026-10-30\",\n  \"expected\": [\"7\", \"Northwind Traders, Ltd\", \"2026-10-30\"]\n}\n",
+  "timing": {
+   "read_ms": 135,
+   "total_ms": 136
+  }
+ },
+ "credits": 6.0,
+ "model_ms": 132.206818,
+ "latency_ms": 376,
+ "recorded_at": "2026-11-06T05:15:46Z"
+}
