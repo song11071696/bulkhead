@@ -75,12 +75,12 @@
   },
   "anonymized_text": "{\n  \"ticket\": 4411,\n  \"customer\": {\"name\": \"<PERSON>\", \"email\": \"<EMAIL>\", \"phone\": \"<PHONE>\"},\n  \"line\": \"7,\\\"Northwind Traders, Ltd\\\",2026-10-30\",\n  \"expected\": [\"7\", \"Northwind Traders, Ltd\", \"2026-10-30\"]\n}\n",
   "timing": {
-   "read_ms": 135,
-   "total_ms": 136
+   "read_ms": 110,
+   "total_ms": 111
   }
  },
- "credits": 6.0,
- "model_ms": 132.206818,
- "latency_ms": 376,
- "recorded_at": "2026-11-06T05:15:46Z"
+ "credits": 5.0,
+ "model_ms": 108.138878,
+ "latency_ms": 419,
+ "recorded_at": "2026-11-06T05:26:12Z"
 }

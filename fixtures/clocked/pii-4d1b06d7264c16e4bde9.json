@@ -23,9 +23,9 @@
    {
     "type": "api_secret",
     "value": "pay_live_EXAMPLE_4f9a8e7d6c5b4a3f2e1d0c9b",
-    "start": 57,
-    "end": 102,
-    "confidence": 0.973,
+    "start": 59,
+    "end": 100,
+    "confidence": 0.998,
     "source": "model",
     "mentions": 1
    }
@@ -55,12 +55,12 @@
   },
   "anonymized_text": "import os\n\n# Payment provider settings\nPAYMENTS_API_KEY = \"<API_SECRET>\"\nWEBHOOK_URL = os.environ.get(\"WEBHOOK_URL\", \"https://hooks.example.com/billing\")\n",
   "timing": {
-   "read_ms": 120,
-   "total_ms": 121
+   "read_ms": 92,
+   "total_ms": 93
   }
  },
- "credits": 5.0,
- "model_ms": 117.299774,
- "latency_ms": 358,
- "recorded_at": "2026-11-06T05:15:46Z"
+ "credits": 4.0,
+ "model_ms": 90.026688,
+ "latency_ms": 360,
+ "recorded_at": "2026-11-06T05:26:13Z"
 }

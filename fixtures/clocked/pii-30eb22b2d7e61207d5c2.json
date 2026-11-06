@@ -65,12 +65,12 @@
   },
   "anonymized_text": "https://status.example-monitor.io/lookup?card=<CREDIT_CARD>&email=<EMAIL>",
   "timing": {
-   "read_ms": 84,
-   "total_ms": 85
+   "read_ms": 69,
+   "total_ms": 70
   }
  },
- "credits": 4.0,
- "model_ms": 81.387779,
- "latency_ms": 364,
- "recorded_at": "2026-11-06T05:15:46Z"
+ "credits": 3.0,
+ "model_ms": 66.613281,
+ "latency_ms": 353,
+ "recorded_at": "2026-11-06T05:26:13Z"
 }

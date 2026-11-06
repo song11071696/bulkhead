@@ -39,7 +39,7 @@
     "endpoint": "injection",
     "name": "guard",
     "status": 200,
-    "ms": 32,
+    "ms": 25,
     "result": {
      "model": "clocked-1.0",
      "injection": 0.01613167498203072,
@@ -68,8 +68,8 @@
      },
      "evidence": [],
      "timing": {
-      "read_ms": 32,
-      "total_ms": 32
+      "read_ms": 24,
+      "total_ms": 24
      }
     }
    },
@@ -78,7 +78,7 @@
     "endpoint": "pii",
     "name": "protect",
     "status": 200,
-    "ms": 177,
+    "ms": 148,
     "result": {
      "model": "clocked-1.0",
      "entities": [
@@ -146,20 +146,20 @@
       "rejected": {}
      },
      "timing": {
-      "read_ms": 175,
-      "total_ms": 176
+      "read_ms": 147,
+      "total_ms": 148
      }
     }
    }
   ],
   "stopped": null,
   "timing": {
-   "total_ms": 210,
+   "total_ms": 174,
    "model_ms": 0
   }
  },
- "credits": 9.0,
- "model_ms": 201.879742,
- "latency_ms": 426,
- "recorded_at": "2026-11-06T05:15:45Z"
+ "credits": 7.0,
+ "model_ms": 163.532669,
+ "latency_ms": 563,
+ "recorded_at": "2026-11-06T05:26:12Z"
 }

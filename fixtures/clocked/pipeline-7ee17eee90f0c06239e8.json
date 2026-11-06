@@ -109,7 +109,7 @@
     "endpoint": "pii",
     "name": "secrets",
     "status": 200,
-    "ms": 46,
+    "ms": 47,
     "result": {
      "model": "clocked-1.0",
      "entities": [],
@@ -135,8 +135,8 @@
       "rejected": {}
      },
      "timing": {
-      "read_ms": 45,
-      "total_ms": 46
+      "read_ms": 46,
+      "total_ms": 47
      }
     }
    },
@@ -188,12 +188,12 @@
   ],
   "stopped": null,
   "timing": {
-   "total_ms": 107,
+   "total_ms": 108,
    "model_ms": 19
   }
  },
  "credits": 4.0,
- "model_ms": 97.277695,
- "latency_ms": 311,
- "recorded_at": "2026-11-06T05:15:47Z"
+ "model_ms": 97.455458,
+ "latency_ms": 399,
+ "recorded_at": "2026-11-06T05:26:14Z"
 }
